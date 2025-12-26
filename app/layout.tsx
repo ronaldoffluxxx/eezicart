@@ -1,5 +1,13 @@
 import type { Metadata } from "next";
+import { Inter, Sniglet } from "next/font/google";
 import "./globals.css";
+
+const inter = Inter({ subsets: ["latin"] });
+const sniglet = Sniglet({
+    weight: "400",
+    subsets: ["latin"],
+    variable: "--font-sniglet",
+});
 
 export const metadata: Metadata = {
     title: "EeziCart Virtual Market - Shop, Rent & Own",
@@ -14,7 +22,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className="antialiased">
+            <body className={`${inter.className} ${sniglet.variable} antialiased`}>
                 {children}
             </body>
         </html>
