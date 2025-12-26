@@ -27,26 +27,26 @@ BEGIN
 
     IF v_vendor_id IS NOT NULL THEN
         -- 1. LAGOS PRODUCTS
-        INSERT INTO products (name, description, price, category, condition, stock, images, vendor_id, location_state, location_city, status) VALUES
-        ('iPhone 14 Pro Max', 'Deep Purple, 256GB.', 1200000, 'electronics', 'new', 5, ARRAY['https://images.unsplash.com/photo-1678685888221-cda773a3dcdb?auto=format&fit=crop&w=500&q=60'], v_vendor_id, 'Lagos', 'Ikeja', 'published'),
-        ('Samsung 55" TV', '4K Smart TV.', 450000, 'electronics', 'new', 3, ARRAY['https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=500&q=60'], v_vendor_id, 'Lagos', 'Surulere', 'published');
+        INSERT INTO products (name, description, price, category, stock, images, vendor_id, location_state, location_city, status) VALUES
+        ('iPhone 14 Pro Max', 'Deep Purple, 256GB.', 1200000, 'electronics', 5, ARRAY['https://images.unsplash.com/photo-1678685888221-cda773a3dcdb?auto=format&fit=crop&w=500&q=60'], v_vendor_id, 'Lagos', 'Ikeja', 'published'),
+        ('Samsung 55" TV', '4K Smart TV.', 450000, 'electronics', 3, ARRAY['https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=500&q=60'], v_vendor_id, 'Lagos', 'Surulere', 'published');
 
         -- 2. ABUJA PRODUCTS
-        INSERT INTO products (name, description, price, category, condition, stock, images, vendor_id, location_state, location_city, status) VALUES
-        ('Office Chair', 'Ergonomic mesh chair.', 85000, 'furniture', 'new', 10, ARRAY['https://images.unsplash.com/photo-1580480055273-228ff5388ef8?auto=format&fit=crop&w=500&q=60'], v_vendor_id, 'Abuja', 'Wuse', 'published');
+        INSERT INTO products (name, description, price, category, stock, images, vendor_id, location_state, location_city, status) VALUES
+        ('Office Chair', 'Ergonomic mesh chair.', 85000, 'furniture', 10, ARRAY['https://images.unsplash.com/photo-1580480055273-228ff5388ef8?auto=format&fit=crop&w=500&q=60'], v_vendor_id, 'Abuja', 'Wuse', 'published');
 
         -- 3. KANO PRODUCTS
-        INSERT INTO products (name, description, price, category, condition, stock, images, vendor_id, location_state, location_city, status) VALUES
-        ('Solar Generator', '2KVA Solar System.', 350000, 'electronics', 'new', 5, ARRAY['https://images.unsplash.com/photo-1545259741-2ea3ebf61fa3?auto=format&fit=crop&w=500&q=60'], v_vendor_id, 'Kano', 'Kano', 'published');
+        INSERT INTO products (name, description, price, category, stock, images, vendor_id, location_state, location_city, status) VALUES
+        ('Solar Generator', '2KVA Solar System.', 350000, 'electronics', 5, ARRAY['https://images.unsplash.com/photo-1545259741-2ea3ebf61fa3?auto=format&fit=crop&w=500&q=60'], v_vendor_id, 'Kano', 'Kano', 'published');
 
         -- 4. ENUGU PRODUCTS
-        INSERT INTO products (name, description, price, category, condition, stock, images, vendor_id, location_state, location_city, status) VALUES
-        ('Nike Sneakers', 'Air Max running shoes.', 45000, 'fashion', 'new', 8, ARRAY['https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=500&q=60'], v_vendor_id, 'Enugu', 'Enugu', 'published'),
-        ('Blender & Grinder', 'High speed blender for smoothies and beans.', 25000, 'home_appliances', 'new', 15, ARRAY['https://images.unsplash.com/photo-1570222094114-28a9d88aa907?auto=format&fit=crop&w=500&q=60'], v_vendor_id, 'Enugu', 'Nsukka', 'published');
+        INSERT INTO products (name, description, price, category, stock, images, vendor_id, location_state, location_city, status) VALUES
+        ('Nike Sneakers', 'Air Max running shoes.', 45000, 'fashion', 8, ARRAY['https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=500&q=60'], v_vendor_id, 'Enugu', 'Enugu', 'published'),
+        ('Blender & Grinder', 'High speed blender for smoothies and beans.', 25000, 'home_appliances', 15, ARRAY['https://images.unsplash.com/photo-1570222094114-28a9d88aa907?auto=format&fit=crop&w=500&q=60'], v_vendor_id, 'Enugu', 'Nsukka', 'published');
 
         -- 5. OYO (IBADAN) PRODUCTS
-        INSERT INTO products (name, description, price, category, condition, stock, images, vendor_id, location_state, location_city, status) VALUES
-        ('Gas Cooker 4-Burner', 'Table top gas cooker, durable.', 18000, 'home_appliances', 'used', 4, ARRAY['https://images.unsplash.com/photo-1583947215259-38e31be8751f?auto=format&fit=crop&w=500&q=60'], v_vendor_id, 'Oyo', 'Ibadan', 'published');
+        INSERT INTO products (name, description, price, category, stock, images, vendor_id, location_state, location_city, status) VALUES
+        ('Gas Cooker 4-Burner', 'Table top gas cooker, durable.', 18000, 'home_appliances', 4, ARRAY['https://images.unsplash.com/photo-1583947215259-38e31be8751f?auto=format&fit=crop&w=500&q=60'], v_vendor_id, 'Oyo', 'Ibadan', 'published');
 
     END IF;
 
