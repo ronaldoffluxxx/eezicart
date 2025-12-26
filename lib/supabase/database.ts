@@ -79,8 +79,8 @@ export const updateWalletBalance = async (userId: string, amount: number): Promi
     const user = await getUserById(userId);
     if (!user) return false;
 
-    const newBalance = user.wallet_balance + amount;
-    const updated = await updateUser(userId, { wallet_balance: newBalance });
+    const newBalance = user.walletBalance + amount;
+    const updated = await updateUser(userId, { walletBalance: newBalance });
     return !!updated;
 };
 
