@@ -92,6 +92,8 @@ export const getProducts = async (filters?: {
     category?: string;
     vendorId?: string;
     status?: string;
+    state?: string;
+    city?: string;
 }): Promise<Product[]> => {
     let query = supabase.from('products').select('*');
 
@@ -103,6 +105,12 @@ export const getProducts = async (filters?: {
     }
     if (filters?.status) {
         query = query.eq('status', filters.status);
+    }
+    if (filters?.state) {
+        query = query.eq('location_state', filters.state);
+    }
+    if (filters?.city) {
+        query = query.eq('location_city', filters.city);
     }
 
     const { data, error } = await query.order('created_at', { ascending: false });

@@ -51,8 +51,9 @@ Repeat for `property-images` and `avatars` buckets (change bucket_id).
 ## Step 3: Run Seed Data
 
 1. Go to Supabase Dashboard → SQL Editor
-2. Run the `seed.sql` file
-3. This will create test users and sample data
+2. Run the `seed.sql` file first to create initial data and tables
+3. Run the `seed_bulk.sql` file to add ~30 more products and properties 
+   (Remember to replace UUIDs in both files with actual User IDs from Authentication)
 
 ## Step 4: Test Accounts
 
