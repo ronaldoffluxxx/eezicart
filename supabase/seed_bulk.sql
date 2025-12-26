@@ -83,7 +83,7 @@ INSERT INTO properties (
 ('8ffed2bc-4933-4386-bd61-08085104a6be', 'studio', 'Luxury Studio Apartment', 'High-end studio in GRA', 'Rivers', 'Port Harcourt', 'GRA Phase 2', 'Polo Club', 800000, 1200000, 100000, 100000, true, 24, 1, 1, 1, 45, 'furnished', ARRAY['AC', 'Pool', 'Gym'], ARRAY['https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&q=80'], 'available'),
 
 -- Kano
-('8ffed2bc-4933-4386-bd61-08085104a6be', 'bungalow', '3 Bedroom Bungalow', 'Spacious compound bungalow', 'Kano', 'Kano', 'Nassarawa GRA', 'Government House', 1500000, 2000000, 100000, 100000, true, 60, 3, 3, 4, 300, 'unfurnished', ARRAY['Garden', 'Security', 'Water'], ARRAY['https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80'], 'available'),
+('8ffed2bc-4933-4386-bd61-08085104a6be', 'house', '3 Bedroom Bungalow', 'Spacious compound bungalow', 'Kano', 'Kano', 'Nassarawa GRA', 'Government House', 1500000, 2000000, 100000, 100000, true, 60, 3, 3, 4, 300, 'unfurnished', ARRAY['Garden', 'Security', 'Water'], ARRAY['https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80'], 'available'),
 
 -- Oyo (Ibadan)
 ('8ffed2bc-4933-4386-bd61-08085104a6be', 'apartment', 'Mini Flat in Bodija', 'Affordable mini flat', 'Oyo', 'Ibadan', 'Bodija Estate', 'Premier Hotel', 400000, 500000, 50000, 50000, false, NULL, 1, 1, 1, 40, 'unfurnished', ARRAY['Water', 'Fenced'], ARRAY['https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&q=80'], 'available');
