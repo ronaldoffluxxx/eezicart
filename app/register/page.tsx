@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Eye, EyeOff, Mail, Lock, User, Phone, MapPin } from 'lucide-react';
 import { signUp } from '@/lib/supabase/auth';
+import { NIGERIAN_STATES } from '@/lib/constants/data';
 
 export default function RegisterPage() {
     const router = useRouter();
@@ -17,7 +18,7 @@ export default function RegisterPage() {
         password: '',
         confirmPassword: '',
         userType: 'tenant' as 'tenant' | 'vendor' | 'landlord',
-        state: 'Lagos',
+        state: '',
         city: '',
     });
     const [error, setError] = useState('');
@@ -84,11 +85,8 @@ export default function RegisterPage() {
         }
     };
 
-    const cities = {
-        Lagos: ['Ikeja', 'Lekki', 'Victoria Island', 'Surulere', 'Yaba'],
-        Abuja: ['Garki', 'Wuse', 'Maitama', 'Asokoro', 'Gwarinpa'],
-        'Port Harcourt': ['GRA', 'Trans Amadi', 'Rumuola', 'Eliozu'],
-    };
+    // Helper to get cities for selected state
+    const availableCities = NIGERIAN_STATES.find(s => s.name === formData.state)?.cities || [];
 
     return (
         <div
@@ -144,8 +142,8 @@ export default function RegisterPage() {
                                             type="button"
                                             onClick={() => setFormData({ ...formData, userType: type })}
                                             className={`py-2 px-3 rounded-lg text-sm font-medium transition-colors ${formData.userType === type
-                                                    ? 'bg-primary text-white'
-                                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                                ? 'bg-primary text-white'
+                                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                                 }`}
                                         >
                                             {type === 'tenant' ? 'Rent' : type === 'vendor' ? 'Sell' : 'List Property'}
@@ -210,10 +208,14 @@ export default function RegisterPage() {
                                         value={formData.state}
                                         onChange={(e) => setFormData({ ...formData, state: e.target.value, city: '' })}
                                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                                        required
                                     >
-                                        <option value="Lagos">Lagos</option>
-                                        <option value="Abuja">Abuja</option>
-                                        <option value="Port Harcourt">Port Harcourt</option>
+                                        <option value="">Select State</option>
+                                        {NIGERIAN_STATES.map((state) => (
+                                            <option key={state.name} value={state.name}>
+                                                {state.name}
+                                            </option>
+                                        ))}
                                     </select>
                                 </div>
                                 <div>
@@ -223,9 +225,10 @@ export default function RegisterPage() {
                                         onChange={(e) => setFormData({ ...formData, city: e.target.value })}
                                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                                         required
+                                        disabled={!formData.state}
                                     >
                                         <option value="">Select city</option>
-                                        {cities[formData.state as keyof typeof cities].map((city) => (
+                                        {availableCities.map((city) => (
                                             <option key={city} value={city}>
                                                 {city}
                                             </option>

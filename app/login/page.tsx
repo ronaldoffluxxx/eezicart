@@ -43,59 +43,30 @@ export default function LoginPage() {
             const { profile, error: profileError } = await getUserProfile(user.id);
 
             if (profileError || !profile) {
-                setError('Failed to load user profile');
-                setLoading(false);
-                return;
-            }
-
-            // Detect location
-            if ('geolocation' in navigator) {
-                try {
-                    const position = await new Promise<GeolocationPosition>((resolve, reject) => {
-                        navigator.geolocation.getCurrentPosition(resolve, reject);
-                    });
-
-                    // Simple mock mapping for demo
-                    // In production use Google Maps Geocoding API
-                    const mockLocations = [
-                        { state: 'Lagos', city: 'Ikeja' },
-                        { state: 'Abuja', city: 'FCT' },
-                        { state: 'Rivers', city: 'Port Harcourt' },
-                    ];
-                    const randomLoc = mockLocations[Math.floor(Math.random() * mockLocations.length)];
-
-                    localStorage.setItem('userLocation', JSON.stringify({
-                        state: profile.location_state || randomLoc.state,
-                        city: profile.location_city || randomLoc.city
-                    }));
-                } catch (e) {
-                    // Fallback to profile location
-                    if (profile.location_state && profile.location_city) {
-                        localStorage.setItem('userLocation', JSON.stringify({
-                            state: profile.location_state,
-                            city: profile.location_city
-                        }));
-                    }
-                }
+                // If profile fetch fails, try to use user metadata or fail gracefully
+                console.error('Error fetching profile:', profileError);
             }
 
             // Store current user in localStorage for quick access
+            // NOTE: We only use the location from the profile. 
+            // If it's missing, 'Home' will handle it (showing all products or prompting selection).
             localStorage.setItem('currentUser', JSON.stringify({
                 id: user.id,
                 email: user.email,
-                userType: profile.user_type,
-                name: profile.name,
-                phone: profile.phone,
-                walletBalance: profile.wallet_balance || 0,
+                userType: profile?.user_type || 'tenant',
+                name: profile?.full_name || profile?.name || 'User',
+                phone: profile?.phone,
+                walletBalance: profile?.wallet_balance || 0,
                 location: {
-                    state: profile.location_state || '',
-                    city: profile.location_city || '',
+                    state: profile?.location_state || '',
+                    city: profile?.location_city || '',
                 },
-                businessName: profile.business_name,
-                status: profile.status,
+                avatar: profile?.avatar_url || null,
+                businessName: profile?.business_name,
+                status: profile?.status,
             }));
 
-
+            // CRITICAL: Set authToken to prevent redirect loop
             if (session) {
                 localStorage.setItem('authToken', session.access_token);
             }
@@ -105,7 +76,7 @@ export default function LoginPage() {
             }
 
             // Navigate based on user type
-            if (profile.user_type === 'admin') {
+            if (profile?.user_type === 'admin') {
                 router.push('/admin');
             } else {
                 router.push('/home');
