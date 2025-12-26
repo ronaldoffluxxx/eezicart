@@ -53,8 +53,8 @@ export default function SearchPage() {
             const matchedProperties = properties.filter(p =>
                 p.title.toLowerCase().includes(query) ||
                 p.description.toLowerCase().includes(query) ||
-                p.location.city.toLowerCase().includes(query) ||
-                p.location.state.toLowerCase().includes(query)
+                p.location_city.toLowerCase().includes(query) ||
+                p.location_state.toLowerCase().includes(query)
             );
             setFilteredProperties(matchedProperties);
         } else {
@@ -170,8 +170,8 @@ export default function SearchPage() {
                             <button
                                 onClick={() => setActiveTab('products')}
                                 className={`py-3 px-2 font-medium border-b-2 transition-colors ${activeTab === 'products'
-                                        ? 'border-primary text-primary'
-                                        : 'border-transparent text-gray-600 hover:text-gray-900'
+                                    ? 'border-primary text-primary'
+                                    : 'border-transparent text-gray-600 hover:text-gray-900'
                                     }`}
                             >
                                 Products ({filteredProducts.length})
@@ -179,8 +179,8 @@ export default function SearchPage() {
                             <button
                                 onClick={() => setActiveTab('properties')}
                                 className={`py-3 px-2 font-medium border-b-2 transition-colors ${activeTab === 'properties'
-                                        ? 'border-primary text-primary'
-                                        : 'border-transparent text-gray-600 hover:text-gray-900'
+                                    ? 'border-primary text-primary'
+                                    : 'border-transparent text-gray-600 hover:text-gray-900'
                                     }`}
                             >
                                 Properties ({filteredProperties.length})
