@@ -32,10 +32,10 @@ export default function PropertiesPage() {
 
         switch (sortBy) {
             case 'price-low':
-                sorted.sort((a, b) => a.pricing.monthly - b.pricing.monthly);
+                sorted.sort((a, b) => a.monthly_price - b.monthly_price);
                 break;
             case 'price-high':
-                sorted.sort((a, b) => b.pricing.monthly - a.pricing.monthly);
+                sorted.sort((a, b) => b.monthly_price - a.monthly_price);
                 break;
             case 'newest':
             default:
@@ -75,8 +75,8 @@ export default function PropertiesPage() {
                         <button
                             onClick={() => setSortBy('newest')}
                             className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap ${sortBy === 'newest'
-                                    ? 'bg-primary text-white'
-                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                ? 'bg-primary text-white'
+                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                 }`}
                         >
                             Newest
@@ -84,8 +84,8 @@ export default function PropertiesPage() {
                         <button
                             onClick={() => setSortBy('price-low')}
                             className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap ${sortBy === 'price-low'
-                                    ? 'bg-primary text-white'
-                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                ? 'bg-primary text-white'
+                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                 }`}
                         >
                             Price: Low to High
@@ -93,8 +93,8 @@ export default function PropertiesPage() {
                         <button
                             onClick={() => setSortBy('price-high')}
                             className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap ${sortBy === 'price-high'
-                                    ? 'bg-primary text-white'
-                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                ? 'bg-primary text-white'
+                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                 }`}
                         >
                             Price: High to Low
