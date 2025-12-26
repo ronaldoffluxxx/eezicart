@@ -91,6 +91,7 @@ export function useCart() {
             }
 
             const newItem: CartItem = {
+                id: `${product.id}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
                 productId: product.id,
                 vendorId: product.vendorId,
                 name: product.name,
@@ -100,6 +101,7 @@ export function useCart() {
                 variation,
                 stock: product.stock,
             };
+
             newItems = [...cart.items, newItem];
         }
 
