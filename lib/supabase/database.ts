@@ -489,19 +489,20 @@ export const createReview = async (review: Omit<Review, 'id' | 'created_at'>): P
     }
 
     // Update product/property rating
-    if (review.product_id) {
-        const reviews = await getReviews({ productId: review.product_id });
+    // Update product/property rating
+    if (review.productId) {
+        const reviews = await getReviews({ productId: review.productId });
         const avgRating = reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length;
-        await updateProduct(review.product_id, {
+        await updateProduct(review.productId, {
             rating: avgRating,
-            review_count: reviews.length,
+            reviewCount: reviews.length,
         });
-    } else if (review.property_id) {
-        const reviews = await getReviews({ propertyId: review.property_id });
+    } else if (review.propertyId) {
+        const reviews = await getReviews({ propertyId: review.propertyId });
         const avgRating = reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length;
-        await updateProperty(review.property_id, {
+        await updateProperty(review.propertyId, {
             rating: avgRating,
-            review_count: reviews.length,
+            reviewCount: reviews.length,
         });
     }
 
