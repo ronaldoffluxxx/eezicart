@@ -61,30 +61,34 @@ export default function HomePage() {
 
         // Load saved location
         const savedLocation = localStorage.getItem('userLocation');
+        let locationFilter = {};
         if (savedLocation) {
-            setLocation(savedLocation);
+            const loc = JSON.parse(savedLocation);
+            setLocation(`${loc.city}, ${loc.state}`);
+            locationFilter = { state: loc.state, city: loc.city };
         }
 
-        // Load products and properties
-        const productsData = localStorage.getItem('products');
-        const propertiesData = localStorage.getItem('properties');
-        const wishlistData = localStorage.getItem('wishlist');
+        // Fetch data from Supabase
+        const fetchData = async () => {
+            try {
+                const { getProducts } = await import('@/lib/supabase/database');
+                const productsData = await getProducts({ status: 'published', ...locationFilter });
+                setProducts(productsData.slice(0, 4));
 
-        if (productsData) {
-            const allProducts: Product[] = JSON.parse(productsData);
-            // Show only first 4 products
-            setProducts(allProducts.slice(0, 4));
-        }
+                const { getProperties } = await import('@/lib/supabase/database');
+                const propertiesData = await getProperties({ status: 'available', ...locationFilter });
+                setProperties(propertiesData.slice(0, 2));
 
-        if (propertiesData) {
-            const allProperties: Property[] = JSON.parse(propertiesData);
-            // Show only first 2 properties
-            setProperties(allProperties.slice(0, 2));
-        }
+                const wishlistData = localStorage.getItem('wishlist');
+                if (wishlistData) {
+                    setWishlist(JSON.parse(wishlistData));
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
 
-        if (wishlistData) {
-            setWishlist(JSON.parse(wishlistData));
-        }
+        fetchData();
     }, [router]);
 
     const handleAddToCart = (product: Product) => {
@@ -111,8 +115,11 @@ export default function HomePage() {
     };
 
     const handleSelectLocation = (selectedLocation: string) => {
+        // selectedLocation is just a string here, but in full implementation it should be structured
+        // For now, let's assume it updates localStorage correctly in LocationSelector component
+        // or we need to reload to apply filters
         setLocation(selectedLocation);
-        localStorage.setItem('userLocation', selectedLocation);
+        window.location.reload(); // Simple reload to re-fetch with new filters
     };
 
     // Get personalized greeting

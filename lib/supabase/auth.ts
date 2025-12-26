@@ -9,6 +9,7 @@ export interface AuthUser {
 }
 
 // Sign up new user
+// Sign up new user
 export async function signUp(email: string, password: string, userData: {
     name: string;
     phone: string;
@@ -17,28 +18,26 @@ export async function signUp(email: string, password: string, userData: {
     locationCity: string;
 }) {
     try {
-        // 1. Create auth user
+        // 1. Create auth user with metadata
+        // The trigger 'on_auth_user_created' will automatically create the profile row
         const { data: authData, error: authError } = await supabase.auth.signUp({
             email,
             password,
+            options: {
+                data: {
+                    name: userData.name,
+                    phone: userData.phone,
+                    user_type: userData.userType, // snake_case for DB mapping
+                    location_state: userData.locationState,
+                    location_city: userData.locationCity,
+                }
+            }
         });
 
         if (authError) throw authError;
         if (!authData.user) throw new Error('No user returned from signup');
 
-        // 2. Create profile
-        const { error: profileError } = await supabase
-            .from('profiles')
-            .insert({
-                id: authData.user.id,
-                user_type: userData.userType,
-                name: userData.name,
-                phone: userData.phone,
-                location_state: userData.locationState,
-                location_city: userData.locationCity,
-            });
-
-        if (profileError) throw profileError;
+        // No need to manually insert profile anymore, the Trigger handles it.
 
         return { user: authData.user, error: null };
     } catch (error: any) {

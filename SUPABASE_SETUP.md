@@ -48,12 +48,15 @@ USING ( bucket_id = 'product-images' AND auth.role() = 'authenticated' );
 
 Repeat for `property-images` and `avatars` buckets (change bucket_id).
 
-## Step 3: Run Seed Data
+## Step 3: Fix Permissions & Seed Data
 
-1. Go to Supabase Dashboard → SQL Editor
-2. Run the `seed.sql` file first to create initial data and tables
-3. Run the `seed_bulk.sql` file to add ~30 more products and properties 
-   (Remember to replace UUIDs in both files with actual User IDs from Authentication)
+1. Run the `fix_rls.sql` file in SQL Editor (This fixes the "new row violates row-level security policy" error).
+2. Run the `seed.sql` file to create initial structure.
+3. **Important**: Go to Authentication -> Users in Supabase Dashboard.
+4. Copy the `User UID` for your test accounts.
+5. In `seed_bulk.sql`, replace `'YOUR_VENDOR_UUID'` with the UUID of your vendor account.
+6. Replace `'YOUR_LANDLORD_UUID'` with the UUID of your landlord account.
+7. Run the `seed_bulk.sql` file.
 
 ## Step 4: Test Accounts
 
