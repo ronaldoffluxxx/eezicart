@@ -241,6 +241,7 @@ export interface Transaction {
 
 // Cart Types
 export interface CartItem {
+    id: string;
     productId: string;
     vendorId: string;
     name: string;
@@ -250,6 +251,7 @@ export interface CartItem {
     variation?: Record<string, string>;
     stock: number;
 }
+
 
 // Review Types
 export interface Review {
