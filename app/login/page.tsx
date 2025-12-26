@@ -96,6 +96,10 @@ export default function LoginPage() {
             }));
 
 
+            if (session) {
+                localStorage.setItem('authToken', session.access_token);
+            }
+
             if (rememberMe) {
                 localStorage.setItem('rememberMe', 'true');
             }
