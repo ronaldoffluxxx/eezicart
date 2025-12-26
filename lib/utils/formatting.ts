@@ -1,5 +1,8 @@
 // Format currency (Nigerian Naira)
-export const formatCurrency = (amount: number): string => {
+export const formatCurrency = (amount: number | undefined | null): string => {
+    if (amount === undefined || amount === null || isNaN(amount)) {
+        return '₦0.00';
+    }
     return new Intl.NumberFormat('en-NG', {
         style: 'currency',
         currency: 'NGN',
