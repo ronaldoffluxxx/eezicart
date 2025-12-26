@@ -9,8 +9,10 @@ export interface User {
     phone: string;
     password: string; // Hashed (mock)
     userType: UserType;
-    location_state: string;
-    location_city: string;
+    location: {
+        state: string;
+        city: string;
+    };
     avatar?: string;
     walletBalance: number;
 
@@ -59,9 +61,11 @@ export interface Product {
 
     variations?: ProductVariation[];
 
-    location_state: string;
-    location_city: string;
-    location_address: string;
+    location: {
+        state: string;
+        city: string;
+        address: string;
+    };
 
     shipping: {
         pickupOnly: boolean;
@@ -89,25 +93,29 @@ export interface Property {
     title: string;
     description: string;
 
-    location_state: string;
-    location_city: string;
-    location_address: string;
-    location_landmarks?: string;
+    location: {
+        state: string;
+        city: string;
+        address: string;
+        landmarks?: string;
+    };
 
-    // Pricing
-    monthly_price: number;
-    yearly_price: number;
-    caution_fee: number;
-    agency_fee: number;
-    monthly_own_enabled: boolean;
-    ownership_duration?: number; // months
+    pricing: {
+        monthly: number;
+        yearly: number;
+        cautionFee: number;
+        agencyFee: number;
+        monthlyOwnEnabled: boolean;
+        ownershipDuration?: number; // months
+    };
 
-    // Specs
-    bedrooms: number;
-    bathrooms: number;
-    toilets: number;
-    size: number; // sqm
-    furnishing: FurnishingType;
+    specs: {
+        bedrooms: number;
+        bathrooms: number;
+        toilets: number;
+        size: number; // sqm
+        furnishing: FurnishingType;
+    };
 
     amenities: string[];
     images: string[];

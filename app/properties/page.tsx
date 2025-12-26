@@ -32,10 +32,10 @@ export default function PropertiesPage() {
 
         switch (sortBy) {
             case 'price-low':
-                sorted.sort((a, b) => a.monthly_price - b.monthly_price);
+                sorted.sort((a, b) => a.pricing.monthly - b.pricing.monthly);
                 break;
             case 'price-high':
-                sorted.sort((a, b) => b.monthly_price - a.monthly_price);
+                sorted.sort((a, b) => b.pricing.monthly - a.pricing.monthly);
                 break;
             case 'newest':
             default:

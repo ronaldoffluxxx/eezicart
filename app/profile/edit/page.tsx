@@ -29,8 +29,8 @@ export default function EditProfilePage() {
                 name: currentUser.name,
                 phone: currentUser.phone,
                 email: currentUser.email,
-                locationState: currentUser.location_state,
-                locationCity: currentUser.location_city,
+                locationState: currentUser.location.state,
+                locationCity: currentUser.location.city,
             });
         }
     }, []);

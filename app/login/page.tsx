@@ -48,6 +48,8 @@ export default function LoginPage() {
             }
 
             // Store current user in localStorage for quick access
+            // NOTE: We only use the location from the profile. 
+            // If it's missing, 'Home' will handle it (showing all products or prompting selection).
             localStorage.setItem('currentUser', JSON.stringify({
                 id: user.id,
                 email: user.email,
@@ -55,6 +57,10 @@ export default function LoginPage() {
                 name: profile?.full_name || profile?.name || 'User',
                 phone: profile?.phone,
                 walletBalance: profile?.wallet_balance || 0,
+                location: {
+                    state: profile?.location_state || '',
+                    city: profile?.location_city || '',
+                },
                 avatar: profile?.avatar_url || null,
                 businessName: profile?.business_name,
                 status: profile?.status,

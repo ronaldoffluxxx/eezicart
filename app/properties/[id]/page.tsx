@@ -113,13 +113,13 @@ export default function PropertyDetailPage() {
                     {/* Location */}
                     <div className="flex items-center text-gray-600 mb-4">
                         <MapPin className="w-4 h-4 mr-1" />
-                        <span className="text-sm">{property.location_address}, {property.location_city}, {property.location_state}</span>
+                        <span className="text-sm">{property.location.address}, {property.location.city}, {property.location.state}</span>
                     </div>
 
                     {/* Price */}
                     <div className="mb-4">
                         <div className="text-3xl font-bold text-primary">
-                            {formatCurrency(property.monthly_price)}
+                            {formatCurrency(property.pricing.monthly)}
                             <span className="text-base text-gray-600 font-normal">/month</span>
                         </div>
                     </div>
@@ -128,15 +128,15 @@ export default function PropertyDetailPage() {
                     <div className="grid grid-cols-3 gap-4 py-4 border-y border-gray-200">
                         <div className="text-center">
                             <Bed className="w-6 h-6 mx-auto text-gray-600 mb-1" />
-                            <p className="text-sm text-gray-600">{property.bedrooms} Beds</p>
+                            <p className="text-sm text-gray-600">{property.specs.bedrooms} Beds</p>
                         </div>
                         <div className="text-center">
                             <Bath className="w-6 h-6 mx-auto text-gray-600 mb-1" />
-                            <p className="text-sm text-gray-600">{property.bathrooms} Baths</p>
+                            <p className="text-sm text-gray-600">{property.specs.bathrooms} Baths</p>
                         </div>
                         <div className="text-center">
                             <Square className="w-6 h-6 mx-auto text-gray-600 mb-1" />
-                            <p className="text-sm text-gray-600">{property.size} sqm</p>
+                            <p className="text-sm text-gray-600">{property.specs.size} sqm</p>
                         </div>
                     </div>
 

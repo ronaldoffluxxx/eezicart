@@ -261,7 +261,7 @@ export default function ProductDetailPage() {
                                 <p className="font-medium text-gray-900">{vendor.businessName || vendor.name}</p>
                                 <div className="flex items-center text-gray-600 text-sm mt-1">
                                     <MapPin className="w-4 h-4 mr-1" />
-                                    <span>{vendor.location_city}, {vendor.location_state}</span>
+                                    <span>{vendor.location.city}, {vendor.location.state}</span>
                                 </div>
                             </div>
                             <button
@@ -294,7 +294,7 @@ export default function ProductDetailPage() {
                                 <MapPin className="w-5 h-5 text-primary mr-3 mt-0.5" />
                                 <div>
                                     <p className="font-medium text-gray-900">Pickup Available</p>
-                                    <p className="text-sm text-gray-600">{product.location_address}</p>
+                                    <p className="text-sm text-gray-600">{product.location.address}</p>
                                 </div>
                             </div>
                         )}

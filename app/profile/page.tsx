@@ -109,7 +109,7 @@ export default function ProfilePage() {
                             <div>
                                 <p className="text-sm text-gray-600">Location</p>
                                 <p className="font-medium text-gray-900">
-                                    {user.location_city}, {user.location_state}
+                                    {user.location.city}, {user.location.state}
                                 </p>
                             </div>
                         </div>
