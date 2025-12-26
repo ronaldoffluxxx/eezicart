@@ -103,7 +103,28 @@ export default function HomePage() {
         fetchData();
     }, [router]);
 
-    // ... (skipped handlers)
+    const handleAddToCart = (product: Product) => {
+        addItem(product, 1);
+        // Show success feedback
+        alert(`${product.name} added to cart!`);
+    };
+
+    const handleToggleWishlist = (productId: string) => {
+        const newWishlist = wishlist.includes(productId)
+            ? wishlist.filter(id => id !== productId)
+            : [...wishlist, productId];
+
+        setWishlist(newWishlist);
+        localStorage.setItem('wishlist', JSON.stringify(newWishlist));
+    };
+
+    const handleCategoryClick = (categoryId: string) => {
+        if (categoryId === 'home') {
+            router.push('/properties');
+        } else {
+            router.push(`/products?category=${categoryId}`);
+        }
+    };
 
     const handleSelectLocation = (selectedLocation: string) => {
         // Fix: Persist selection to localStorage so it survives reload
