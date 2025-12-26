@@ -80,7 +80,7 @@ export default function LocationSelector({ isOpen, onClose, onSelectLocation, cu
                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 disabled:bg-gray-100 disabled:cursor-not-allowed"
                             >
                                 <option value="">Select City</option>
-                                {currentStateObj?.cities.map((city) => (
+                                {currentStateObj?.cities?.map((city) => (
                                     <option key={city} value={city}>
                                         {city}
                                     </option>
