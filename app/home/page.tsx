@@ -129,19 +129,9 @@ export default function HomePage() {
     };
 
     const handleSelectLocation = (selectedLocation: string) => {
-        // Fix: Persist selection to localStorage so it survives reload
-        localStorage.setItem('userLocation', selectedLocation);
-
-        let displayLoc = '';
-        try {
-            const loc = JSON.parse(selectedLocation);
-            displayLoc = `${loc.city}, ${loc.state}`;
-        } catch (e) {
-            displayLoc = selectedLocation;
-        }
-
-        setLocation(displayLoc);
-        window.location.reload();
+        // Location filtering disabled - just close the modal
+        setShowLocationSelector(false);
+        // TODO: Re-enable location filtering later
     };
 
     // Get personalized greeting
