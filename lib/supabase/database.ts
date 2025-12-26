@@ -205,13 +205,13 @@ export const getProperties = async (filters?: {
         query = query.eq('landlord_id', filters.landlordId);
     }
     if (filters?.status) {
-        query = query.eq('availability_status', filters.status);
+        query = query.eq('status', filters.status);
     }
     if (filters?.state) {
-        query = query.eq('state', filters.state);
+        query = query.eq('location_state', filters.state);
     }
     if (filters?.city) {
-        query = query.eq('city', filters.city);
+        query = query.eq('location_city', filters.city);
     }
 
     const { data, error } = await query.order('created_at', { ascending: false });
