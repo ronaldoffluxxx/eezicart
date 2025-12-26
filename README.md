@@ -2,6 +2,8 @@
 
 A comprehensive multi-vendor marketplace web application built with Next.js 14, featuring product sales and property rentals with flexible payment options.
 
+**Live Repository**: https://github.com/ronaldoffluxxx/eezicart
+
 ## Features
 
 - 🛍️ **Multi-vendor Marketplace** - Browse and purchase products from multiple vendors
