@@ -46,8 +46,8 @@ export default function PropertyCard({ property }: PropertyCardProps) {
 
                 {/* Status Badge */}
                 <div className={`absolute top-2 left-2 text-white text-xs font-bold px-2 py-1 rounded ${property.availability.status === 'available' ? 'bg-green-600' :
-                        property.availability.status === 'rented' ? 'bg-red-600' :
-                            'bg-yellow-600'
+                    property.availability.status === 'rented' ? 'bg-red-600' :
+                        'bg-yellow-600'
                     }`}>
                     {property.availability.status.charAt(0).toUpperCase() + property.availability.status.slice(1)}
                 </div>
@@ -62,7 +62,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
                 {/* Location */}
                 <div className="flex items-center text-gray-600 mb-3">
                     <MapPin className="w-4 h-4 mr-1" />
-                    <span className="text-sm">{property.location.city}, {property.location.state}</span>
+                    <span className="text-sm">{property.location_city}, {property.location_state}</span>
                 </div>
 
                 {/* Property Specs */}
