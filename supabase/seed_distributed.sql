@@ -1,5 +1,5 @@
 -- Clean up existing data
-TRUNCATE TABLE reviews, transactions, rentals, orders, properties, products CASCADE;
+TRUNCATE TABLE properties, products CASCADE;
 
 -- Note: We assume users already exist or will be created. 
 -- For this seed, we will rely on the existing 'vendor' and 'landlord' profiles we created earlier.
