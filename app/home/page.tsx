@@ -65,13 +65,13 @@ export default function HomePage() {
 
         // Load saved location safely
         const savedLocation = localStorage.getItem('userLocation');
-        let locationFilter = {};
+        // let locationFilter = {};
         if (savedLocation) {
             try {
                 const loc = JSON.parse(savedLocation);
                 if (loc && typeof loc === 'object') {
                     setLocation(`${loc.city || ''}, ${loc.state || ''}`);
-                    locationFilter = { state: loc.state, city: loc.city };
+                    // locationFilter = { state: loc.state, city: loc.city };
                 }
             } catch (e) {
                 console.error('Error parsing saved location:', e);
@@ -84,11 +84,13 @@ export default function HomePage() {
         const fetchData = async () => {
             try {
                 const { getProducts } = await import('@/lib/supabase/database');
-                const productsData = await getProducts({ status: 'published', ...locationFilter });
+                // Show ALL products regardless of location
+                const productsData = await getProducts({ status: 'published' });
                 setProducts(productsData.slice(0, 4));
 
                 const { getProperties } = await import('@/lib/supabase/database');
-                const propertiesData = await getProperties({ status: 'available', ...locationFilter });
+                // Show ALL properties regardless of location
+                const propertiesData = await getProperties({ status: 'available' });
                 setProperties(propertiesData.slice(0, 2));
 
                 const wishlistData = localStorage.getItem('wishlist');
