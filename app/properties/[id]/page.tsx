@@ -119,7 +119,7 @@ export default function PropertyDetailPage() {
                     {/* Price */}
                     <div className="mb-4">
                         <div className="text-3xl font-bold text-primary">
-                            {formatCurrency(property.pricing.monthly)}
+                            {formatCurrency(property.monthly_price)}
                             <span className="text-base text-gray-600 font-normal">/month</span>
                         </div>
                     </div>
@@ -128,15 +128,15 @@ export default function PropertyDetailPage() {
                     <div className="grid grid-cols-3 gap-4 py-4 border-y border-gray-200">
                         <div className="text-center">
                             <Bed className="w-6 h-6 mx-auto text-gray-600 mb-1" />
-                            <p className="text-sm text-gray-600">{property.specs.bedrooms} Beds</p>
+                            <p className="text-sm text-gray-600">{property.bedrooms} Beds</p>
                         </div>
                         <div className="text-center">
                             <Bath className="w-6 h-6 mx-auto text-gray-600 mb-1" />
-                            <p className="text-sm text-gray-600">{property.specs.bathrooms} Baths</p>
+                            <p className="text-sm text-gray-600">{property.bathrooms} Baths</p>
                         </div>
                         <div className="text-center">
                             <Square className="w-6 h-6 mx-auto text-gray-600 mb-1" />
-                            <p className="text-sm text-gray-600">{property.specs.size} sqm</p>
+                            <p className="text-sm text-gray-600">{property.size} sqm</p>
                         </div>
                     </div>
 

@@ -38,7 +38,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
                 )}
 
                 {/* Monthly Own Badge */}
-                {property.pricing.monthlyOwnEnabled && (
+                {property.monthly_own_enabled && (
                     <div className="absolute top-2 right-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded">
                         Monthly Own
                     </div>
@@ -69,22 +69,22 @@ export default function PropertyCard({ property }: PropertyCardProps) {
                 <div className="flex items-center space-x-4 mb-3 text-gray-700">
                     <div className="flex items-center">
                         <Bed className="w-4 h-4 mr-1" />
-                        <span className="text-sm">{property.specs.bedrooms}</span>
+                        <span className="text-sm">{property.bedrooms}</span>
                     </div>
                     <div className="flex items-center">
                         <Bath className="w-4 h-4 mr-1" />
-                        <span className="text-sm">{property.specs.bathrooms}</span>
+                        <span className="text-sm">{property.bathrooms}</span>
                     </div>
                     <div className="flex items-center">
                         <Maximize className="w-4 h-4 mr-1" />
-                        <span className="text-sm">{property.specs.size}m²</span>
+                        <span className="text-sm">{property.size}m²</span>
                     </div>
                 </div>
 
                 {/* Furnishing Type */}
                 <div className="mb-3">
                     <span className="inline-block bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">
-                        {property.specs.furnishing.charAt(0).toUpperCase() + property.specs.furnishing.slice(1)}
+                        {property.furnishing.charAt(0).toUpperCase() + property.furnishing.slice(1)}
                     </span>
                 </div>
 
@@ -106,13 +106,13 @@ export default function PropertyCard({ property }: PropertyCardProps) {
                     <div className="flex items-baseline justify-between">
                         <div>
                             <span className="text-primary font-bold text-lg">
-                                {formatCurrency(property.pricing.monthly)}
+                                {formatCurrency(property.monthly_price)}
                             </span>
                             <span className="text-gray-600 text-sm">/month</span>
                         </div>
                         <div className="text-right">
                             <span className="text-gray-700 font-semibold text-sm">
-                                {formatCurrency(property.pricing.yearly)}
+                                {formatCurrency(property.yearly_price)}
                             </span>
                             <span className="text-gray-500 text-xs block">/year</span>
                         </div>

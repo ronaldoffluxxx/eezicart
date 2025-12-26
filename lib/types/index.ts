@@ -94,22 +94,20 @@ export interface Property {
     location_address: string;
     location_landmarks?: string;
 
-    pricing: {
-        monthly: number;
-        yearly: number;
-        cautionFee: number;
-        agencyFee: number;
-        monthlyOwnEnabled: boolean;
-        ownershipDuration?: number; // months
-    };
+    // Pricing
+    monthly_price: number;
+    yearly_price: number;
+    caution_fee: number;
+    agency_fee: number;
+    monthly_own_enabled: boolean;
+    ownership_duration?: number; // months
 
-    specs: {
-        bedrooms: number;
-        bathrooms: number;
-        toilets: number;
-        size: number; // sqm
-        furnishing: FurnishingType;
-    };
+    // Specs
+    bedrooms: number;
+    bathrooms: number;
+    toilets: number;
+    size: number; // sqm
+    furnishing: FurnishingType;
 
     amenities: string[];
     images: string[];
