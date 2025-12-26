@@ -113,7 +113,7 @@ export default function PropertyDetailPage() {
                     {/* Location */}
                     <div className="flex items-center text-gray-600 mb-4">
                         <MapPin className="w-4 h-4 mr-1" />
-                        <span className="text-sm">{property.location.address}, {property.location.city}, {property.location.state}</span>
+                        <span className="text-sm">{property.location_address}, {property.location_city}, {property.location_state}</span>
                     </div>
 
                     {/* Price */}

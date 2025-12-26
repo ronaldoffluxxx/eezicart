@@ -93,12 +93,10 @@ export interface Property {
     title: string;
     description: string;
 
-    location: {
-        state: string;
-        city: string;
-        address: string;
-        landmarks?: string;
-    };
+    location_state: string;
+    location_city: string;
+    location_address: string;
+    location_landmarks?: string;
 
     pricing: {
         monthly: number;
