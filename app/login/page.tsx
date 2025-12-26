@@ -48,6 +48,37 @@ export default function LoginPage() {
                 return;
             }
 
+            // Detect location
+            if ('geolocation' in navigator) {
+                try {
+                    const position = await new Promise<GeolocationPosition>((resolve, reject) => {
+                        navigator.geolocation.getCurrentPosition(resolve, reject);
+                    });
+
+                    // Simple mock mapping for demo
+                    // In production use Google Maps Geocoding API
+                    const mockLocations = [
+                        { state: 'Lagos', city: 'Ikeja' },
+                        { state: 'Abuja', city: 'FCT' },
+                        { state: 'Rivers', city: 'Port Harcourt' },
+                    ];
+                    const randomLoc = mockLocations[Math.floor(Math.random() * mockLocations.length)];
+
+                    localStorage.setItem('userLocation', JSON.stringify({
+                        state: profile.location_state || randomLoc.state,
+                        city: profile.location_city || randomLoc.city
+                    }));
+                } catch (e) {
+                    // Fallback to profile location
+                    if (profile.location_state && profile.location_city) {
+                        localStorage.setItem('userLocation', JSON.stringify({
+                            state: profile.location_state,
+                            city: profile.location_city
+                        }));
+                    }
+                }
+            }
+
             // Store current user in localStorage for quick access
             localStorage.setItem('currentUser', JSON.stringify({
                 id: user.id,
@@ -63,6 +94,7 @@ export default function LoginPage() {
                 businessName: profile.business_name,
                 status: profile.status,
             }));
+
 
             if (rememberMe) {
                 localStorage.setItem('rememberMe', 'true');
