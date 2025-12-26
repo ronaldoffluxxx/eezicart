@@ -9,10 +9,8 @@ export interface User {
     phone: string;
     password: string; // Hashed (mock)
     userType: UserType;
-    location: {
-        state: string;
-        city: string;
-    };
+    location_state: string;
+    location_city: string;
     avatar?: string;
     walletBalance: number;
 
@@ -61,11 +59,9 @@ export interface Product {
 
     variations?: ProductVariation[];
 
-    location: {
-        state: string;
-        city: string;
-        address: string;
-    };
+    location_state: string;
+    location_city: string;
+    location_address: string;
 
     shipping: {
         pickupOnly: boolean;

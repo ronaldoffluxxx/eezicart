@@ -94,7 +94,7 @@ export default function ProductCard({
 
                 {/* Vendor Name */}
                 <p className="text-xs text-gray-600 mb-2">
-                    {product.location.city}, {product.location.state}
+                    {product.location_city}, {product.location_state}
                 </p>
 
                 {/* Rating */}
