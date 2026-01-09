@@ -499,6 +499,58 @@ export const generateMockProducts = (): Product[] => {
             location: { state: 'Lagos', city: 'Surulere', address: 'Adeniran Ogunsanya' },
         },
 
+        // VEHICLES (5 products)
+        {
+            name: 'Toyota Camry 2020',
+            description: 'Clean foreign used Toyota Camry 2020. Automatic transmission, low mileage.',
+            category: 'vehicles',
+            subcategory: 'Cars',
+            price: 8500000,
+            stock: 2,
+            images: ['https://images.unsplash.com/photo-1621007947382-bb3c3968e3bb?w=800&q=80'],
+            location: { state: 'Lagos', city: 'Ikeja', address: 'Alausa' },
+        },
+        {
+            name: 'Bajaj Tricycle (Keke)',
+            description: 'Brand new Bajaj Tricycle. Durable and fuel efficient.',
+            category: 'vehicles',
+            subcategory: 'Tricycles',
+            price: 1200000,
+            stock: 10,
+            images: ['https://images.unsplash.com/photo-1617788138017-80ad40651399?w=800&q=80'],
+            location: { state: 'Kano', city: 'Kano Municipal', address: 'Kano Market' },
+        },
+        {
+            name: 'Yamaha Motorcycle',
+            description: 'Sporty Yamaha motorcycle for daily commute.',
+            category: 'vehicles',
+            subcategory: 'Motorcycles',
+            price: 1500000,
+            stock: 5,
+            images: ['https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=800&q=80'],
+            location: { state: 'Abuja', city: 'Garki', address: 'Garki Area 3' },
+        },
+        {
+            name: 'Toyota Corolla 2018',
+            description: 'Reliable Toyota Corolla 2018. Very neat interior and exterior.',
+            category: 'vehicles',
+            subcategory: 'Cars',
+            price: 6500000,
+            stock: 3,
+            images: ['https://images.unsplash.com/photo-1623869675781-80aa31012a5a?w=800&q=80'],
+            location: { state: 'Lagos', city: 'Lekki', address: 'Lekki Phase 1' },
+        },
+        {
+            name: 'Honda Civic 2019',
+            description: 'Sporty Honda Civic 2019 with sunroof and leather seats.',
+            category: 'vehicles',
+            subcategory: 'Cars',
+            price: 7200000,
+            stock: 4,
+            images: ['https://images.unsplash.com/photo-1606152421811-aa91107bac82?w=800&q=80'],
+            location: { state: 'Rivers', city: 'Port Harcourt', address: 'GRA Phase 2' },
+        },
+
         // FOOD & GROCERIES (2 products)
         {
             name: 'Organic Honey 500g',

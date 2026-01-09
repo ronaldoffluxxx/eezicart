@@ -294,8 +294,8 @@ export default function ProductDetailPage() {
                     )}
                 </div>
 
-                {/* Installment Calculator */}
-                {isEligibleForInstallments(product.price) && (
+                {/* Installment Calculator - Only for Vehicles */}
+                {product.category === 'vehicles' && isEligibleForInstallments(product.price) && (
                     <div className="bg-white mt-2 p-4">
                         <InstallmentCalculator productPrice={product.price} />
                     </div>

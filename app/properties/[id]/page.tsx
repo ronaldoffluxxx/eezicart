@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { ArrowLeft, MapPin, Bed, Bath, Square, Calendar } from 'lucide-react';
 import Header from '@/components/Header';
 import BottomNav from '@/components/BottomNav';
+import InstallmentCalculator from '@/components/InstallmentCalculator';
 import { formatCurrency } from '@/lib/utils/formatting';
 import { safeLocalStorageGet } from '@/lib/utils/safeStorage';
 import type { Property, User } from '@/lib/types';
@@ -137,6 +138,11 @@ export default function PropertyDetailPage() {
                             <Square className="w-6 h-6 mx-auto text-gray-600 mb-1" />
                             <p className="text-sm text-gray-600">{property.specs.size} sqm</p>
                         </div>
+                    </div>
+
+                    {/* Installment Calculator */}
+                    <div className="py-4 border-b border-gray-200">
+                        <InstallmentCalculator productPrice={property.pricing.yearly} />
                     </div>
 
                     {/* Description */}

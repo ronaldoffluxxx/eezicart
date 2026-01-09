@@ -102,6 +102,11 @@ export const PRODUCT_CATEGORIES = [
         name: 'Books & Media',
         subcategories: ['Books', 'Movies', 'Music', 'Games']
     },
+    {
+        id: 'vehicles',
+        name: 'Vehicles',
+        subcategories: ['Cars', 'Tricycles', 'Motorcycles', 'Bikes']
+    },
 ];
 
 // Property Types

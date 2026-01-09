@@ -237,6 +237,31 @@ export default function HomePage() {
                     </div>
                 </div>
 
+                {/* Pay Small Small Banner */}
+                <div className="px-4 mb-4">
+                    <button
+                        onClick={() => router.push('/pay-small-small')}
+                        className="w-full bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl p-4 text-white shadow-lg relative overflow-hidden group"
+                    >
+                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                            <svg className="w-24 h-24" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05 1.18 1.91 2.53 1.91 1.29 0 2.13-.81 2.13-1.88 0-1.09-.86-1.72-2.46-2.09-1.4-.35-3.24-1.13-3.24-3.29 0-1.85 1.34-2.88 2.89-3.32V4h2.68v1.89c1.68.32 2.92 1.38 3.11 3.01h-2.05c-.17-.9-1.14-1.57-2.22-1.57-1.17 0-2.03.74-2.03 1.76 0 1.05.8 1.63 2.56 2.05 1.76.4 3.12 1.15 3.12 3.32 0 1.71-1.28 2.85-2.91 3.24z" />
+                            </svg>
+                        </div>
+                        <div className="relative z-10 flex items-center justify-between">
+                            <div className="text-left">
+                                <h3 className="text-lg font-bold mb-1">Pay Small Small</h3>
+                                <p className="text-sm opacity-90">Own cars & properties with ease</p>
+                            </div>
+                            <div className="bg-white/20 backdrop-blur-sm p-2 rounded-lg">
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                </svg>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+
                 {/* Categories */}
                 <div className="px-4 py-4">
                     <h3 className="text-lg font-bold text-gray-900 mb-4">Categories</h3>
