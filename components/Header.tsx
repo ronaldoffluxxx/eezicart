@@ -66,14 +66,14 @@ export default function Header({
                         <Image
                             src="/dashboard-logo-new.png"
                             alt="EeziCart"
-                            width={200}
-                            height={60}
-                            className="h-14 md:h-16 w-auto object-contain mb-1"
+                            width={280}
+                            height={80}
+                            className="h-20 md:h-24 w-auto object-contain mb-1"
                             priority
                         />
                         {userLocation && (
-                            <div className="flex items-center text-xs md:text-sm text-white/90 font-medium pl-1">
-                                <span className="truncate max-w-[180px] md:max-w-none">
+                            <div className="flex items-center text-sm md:text-base text-white/90 font-medium pl-1">
+                                <span className="truncate max-w-[200px] md:max-w-none">
                                     {userLocation}
                                 </span>
                             </div>
