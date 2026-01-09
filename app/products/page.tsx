@@ -10,6 +10,7 @@ import EmptyState from '@/components/EmptyState';
 import { useCart } from '@/lib/hooks/useCart';
 import { useToast } from '@/components/ToastProvider';
 import { safeLocalStorageGet } from '@/lib/utils/safeStorage';
+import { getProducts } from '@/lib/supabase/products';
 import type { Product } from '@/lib/types';
 import { ShoppingBag } from 'lucide-react';
 
@@ -27,43 +28,34 @@ function ProductsContent() {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        const allProducts = safeLocalStorageGet<Product[]>('products', []);
+        const fetchProducts = async () => {
+            setIsLoading(true);
 
-        // Initialize mock data if products don't exist
-        if (!allProducts || allProducts.length === 0) {
-            import('@/lib/utils/mockData').then(({ initializeMockData }) => {
-                initializeMockData();
-                // Reload after initialization
-                const newProducts = safeLocalStorageGet<Product[]>('products', []);
-                if (newProducts && newProducts.length > 0) {
-                    setProducts(newProducts);
-                    const category = searchParams.get('category');
-                    if (category) {
-                        const filtered = newProducts.filter(p => p.category === category);
-                        setFilteredProducts(filtered);
-                    } else {
-                        setFilteredProducts(newProducts);
-                    }
-                }
-                setIsLoading(false);
-            });
-        } else {
-            setProducts(allProducts);
-
-            // Apply category filter if present
+            // Fetch products from Supabase
             const category = searchParams.get('category');
-            if (category) {
-                const filtered = allProducts.filter(p => p.category === category);
-                setFilteredProducts(filtered);
-            } else {
-                setFilteredProducts(allProducts);
+            const { products: supabaseProducts, error } = await getProducts({
+                category: category || undefined
+            });
+
+            if (error) {
+                console.error('Error fetching products from Supabase:', error);
+                showToast('Failed to load products', 'error');
+                setIsLoading(false);
+                return;
             }
+
+            // Use Supabase products
+            const productsData = supabaseProducts || [];
+            setProducts(productsData);
+            setFilteredProducts(productsData);
             setIsLoading(false);
-        }
+        };
+
+        fetchProducts();
 
         const savedWishlist = safeLocalStorageGet<string[]>('wishlist', []);
         setWishlist(savedWishlist || []);
-    }, [searchParams]);
+    }, [searchParams, showToast]);
 
     // Sort products
     useEffect(() => {
@@ -79,11 +71,11 @@ function ProductsContent() {
                 sorted.sort((a, b) => b.price - a.price);
                 break;
             case 'popular':
-                sorted.sort((a, b) => b.sales - a.sales);
+                sorted.sort((a, b) => (b.sales || 0) - (a.sales || 0));
                 break;
             case 'newest':
             default:
-                sorted.sort((a, b) => b.createdAt - a.createdAt);
+                sorted.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
                 break;
         }
 
