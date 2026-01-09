@@ -36,6 +36,7 @@ CREATE TRIGGER on_auth_user_created
 
 -- 2. Allow PUBLIC read access to profiles
 -- This is necessary so users can see vendor/landlord details on product pages
+DROP POLICY IF EXISTS "Profiles are viewable by everyone" ON profiles;
 CREATE POLICY "Profiles are viewable by everyone" ON profiles
   FOR SELECT USING (true);
 
