@@ -11,8 +11,10 @@ import { useCart } from '@/lib/hooks/useCart';
 import { useToast } from '@/components/ToastProvider';
 import { formatCurrency } from '@/lib/utils/formatting';
 import { isEligibleForInstallments } from '@/lib/utils/installments';
+import { getProduct, incrementProductViews } from '@/lib/supabase/products';
 import { safeLocalStorageGet } from '@/lib/utils/safeStorage';
 import type { Product, User } from '@/lib/types';
+import { supabase } from '@/lib/supabase/client';
 
 export default function ProductDetailPage() {
     const router = useRouter();
@@ -29,51 +31,57 @@ export default function ProductDetailPage() {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        // Load product
-        const products = safeLocalStorageGet<Product[]>('products', []);
+        const fetchProduct = async () => {
+            setIsLoading(true);
 
-        // Initialize mock data if products don't exist
-        if (!products || products.length === 0) {
-            import('@/lib/utils/mockData').then(({ initializeMockData }) => {
-                initializeMockData();
-                // Reload after initialization
-                const newProducts = safeLocalStorageGet<Product[]>('products', []);
-                if (newProducts) {
-                    const foundProduct = newProducts.find(p => p.id === productId);
-                    if (foundProduct) {
-                        setProduct(foundProduct);
+            // Fetch product from Supabase
+            const { product: supabaseProduct, error } = await getProduct(productId);
 
-                        // Load vendor info
-                        const users = safeLocalStorageGet<User[]>('users', []);
-                        if (users) {
-                            const foundVendor = users.find(u => u.id === foundProduct.vendorId);
-                            if (foundVendor) {
-                                setVendor(foundVendor);
-                            }
-                        }
-                    }
-                }
-            });
-        } else {
-            const foundProduct = products.find(p => p.id === productId);
-            if (foundProduct) {
-                setProduct(foundProduct);
-
-                // Load vendor info
-                const users = safeLocalStorageGet<User[]>('users', []);
-                if (users) {
-                    const foundVendor = users.find(u => u.id === foundProduct.vendorId);
-                    if (foundVendor) {
-                        setVendor(foundVendor);
-                    }
-                }
+            if (error) {
+                console.error('Error fetching product:', error);
+                showToast('Failed to load product', 'error');
+                setIsLoading(false);
+                // Redirect to products page after delay
+                setTimeout(() => {
+                    router.push('/products');
+                }, 2000);
+                return;
             }
-        }
+
+            if (supabaseProduct) {
+                setProduct(supabaseProduct);
+
+                // Increment views
+                incrementProductViews(productId);
+
+                // Load vendor info from Supabase
+                const { data: vendorData } = await supabase
+                    .from('profiles')
+                    .select('*')
+                    .eq('id', supabaseProduct.vendorId)
+                    .single();
+
+                if (vendorData) {
+                    setVendor(vendorData);
+                }
+
+                setIsLoading(false);
+            } else {
+                // Product not found
+                showToast('Product not found', 'error');
+                setIsLoading(false);
+                setTimeout(() => {
+                    router.push('/products');
+                }, 2000);
+            }
+        };
+
+        fetchProduct();
 
         // Check wishlist
         const wishlist = safeLocalStorageGet<string[]>('wishlist', []);
         setIsInWishlist(wishlist?.includes(productId) || false);
-    }, [productId]);
+    }, [productId, router, showToast]);
 
     const handleAddToCart = () => {
         if (product) {
@@ -114,10 +122,21 @@ export default function ProductDetailPage() {
         }
     };
 
+    if (isLoading) {
+        return (
+            <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+                <p className="text-gray-600">Loading product...</p>
+            </div>
+        );
+    }
+
     if (!product) {
         return (
             <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-                <p className="text-gray-600">Loading...</p>
+                <div className="text-center">
+                    <p className="text-gray-600 mb-2">Product not found</p>
+                    <p className="text-sm text-gray-500">Redirecting to products page...</p>
+                </div>
             </div>
         );
     }
@@ -209,15 +228,15 @@ export default function ProductDetailPage() {
                         <div className="flex items-center">
                             <Star className="w-5 h-5 fill-yellow-500 text-yellow-500" />
                             <span className="text-base font-semibold text-gray-900 ml-1">
-                                {product.rating.toFixed(1)}
+                                {product.rating?.toFixed(1) || '0.0'}
                             </span>
                         </div>
                         <span className="text-gray-600 ml-2">
-                            ({product.reviewCount} reviews)
+                            ({product.reviewCount || 0} reviews)
                         </span>
                         <span className="text-gray-400 mx-2">•</span>
                         <span className="text-gray-600">
-                            {product.sales} sold
+                            {product.sales || 0} sold
                         </span>
                     </div>
 
@@ -275,6 +294,13 @@ export default function ProductDetailPage() {
                     )}
                 </div>
 
+                {/* Installment Calculator */}
+                {isEligibleForInstallments(product.price) && (
+                    <div className="bg-white mt-2 p-4">
+                        <InstallmentCalculator productPrice={product.price} />
+                    </div>
+                )}
+
                 {/* Vendor Info */}
                 {vendor && (
                     <div className="bg-white mt-2 p-4">
@@ -301,7 +327,7 @@ export default function ProductDetailPage() {
                 <div className="bg-white mt-2 p-4">
                     <h3 className="font-semibold text-gray-900 mb-3">Delivery & Returns</h3>
                     <div className="space-y-3">
-                        {product.shipping.deliveryAvailable && (
+                        {product.shipping?.deliveryAvailable && (
                             <div className="flex items-start">
                                 <Truck className="w-5 h-5 text-primary mr-3 mt-0.5" />
                                 <div>
@@ -312,12 +338,12 @@ export default function ProductDetailPage() {
                                 </div>
                             </div>
                         )}
-                        {product.shipping.pickupOnly && (
+                        {product.shipping?.pickupOnly && (
                             <div className="flex items-start">
                                 <MapPin className="w-5 h-5 text-primary mr-3 mt-0.5" />
                                 <div>
                                     <p className="font-medium text-gray-900">Pickup Available</p>
-                                    <p className="text-sm text-gray-600">{product.location.address}</p>
+                                    <p className="text-sm text-gray-600">{product.location?.address}</p>
                                 </div>
                             </div>
                         )}
