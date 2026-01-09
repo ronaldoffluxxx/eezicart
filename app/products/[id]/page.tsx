@@ -30,7 +30,30 @@ export default function ProductDetailPage() {
     useEffect(() => {
         // Load product
         const products = safeLocalStorageGet<Product[]>('products', []);
-        if (products) {
+
+        // Initialize mock data if products don't exist
+        if (!products || products.length === 0) {
+            import('@/lib/utils/mockData').then(({ initializeMockData }) => {
+                initializeMockData();
+                // Reload after initialization
+                const newProducts = safeLocalStorageGet<Product[]>('products', []);
+                if (newProducts) {
+                    const foundProduct = newProducts.find(p => p.id === productId);
+                    if (foundProduct) {
+                        setProduct(foundProduct);
+
+                        // Load vendor info
+                        const users = safeLocalStorageGet<User[]>('users', []);
+                        if (users) {
+                            const foundVendor = users.find(u => u.id === foundProduct.vendorId);
+                            if (foundVendor) {
+                                setVendor(foundVendor);
+                            }
+                        }
+                    }
+                }
+            });
+        } else {
             const foundProduct = products.find(p => p.id === productId);
             if (foundProduct) {
                 setProduct(foundProduct);
