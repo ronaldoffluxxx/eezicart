@@ -6,9 +6,11 @@ import Image from 'next/image';
 import { ArrowLeft, ShoppingCart, Heart, Minus, Plus, Star, MapPin, Truck } from 'lucide-react';
 import Header from '@/components/Header';
 import BottomNav from '@/components/BottomNav';
+import InstallmentCalculator from '@/components/InstallmentCalculator';
 import { useCart } from '@/lib/hooks/useCart';
 import { useToast } from '@/components/ToastProvider';
 import { formatCurrency } from '@/lib/utils/formatting';
+import { isEligibleForInstallments } from '@/lib/utils/installments';
 import { safeLocalStorageGet } from '@/lib/utils/safeStorage';
 import type { Product, User } from '@/lib/types';
 

@@ -289,3 +289,59 @@ export interface Notification {
     relatedId?: string;
     createdAt: number;
 }
+
+// Installment Payment Types
+export type InstallmentPlan = '3-months' | '6-months' | '12-months';
+export type InstallmentStatus = 'active' | 'completed' | 'defaulted' | 'cancelled';
+
+export interface InstallmentConfig {
+    enabled: boolean;
+    minAmount: number; // Minimum product price for installments
+    plans: {
+        duration: 3 | 6 | 12;
+        interestRate: number; // Percentage (e.g., 5 for 5%)
+        label: string;
+    }[];
+}
+
+export interface Installment {
+    id: string;
+    userId: string;
+    productId: string;
+    orderId: string;
+    productName: string;
+    productImage: string;
+
+    // Payment details
+    productPrice: number;
+    downPayment: number;
+    totalAmount: number; // Including interest
+    monthlyPayment: number;
+
+    // Plan details
+    plan: InstallmentPlan;
+    duration: number; // months
+    interestRate: number;
+
+    // Payment tracking
+    paidInstallments: number;
+    remainingInstallments: number;
+    nextPaymentDate: number;
+
+    payments: InstallmentPayment[];
+
+    status: InstallmentStatus;
+    createdAt: number;
+    completedAt?: number;
+}
+
+export interface InstallmentPayment {
+    id: string;
+    installmentId: string;
+    amount: number;
+    dueDate: number;
+    paidDate?: number;
+    status: 'pending' | 'paid' | 'overdue';
+    paymentMethod?: string;
+    transactionRef?: string;
+}

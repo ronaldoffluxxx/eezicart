@@ -129,6 +129,15 @@ export default function ProductCard({
                     </div>
                 </div>
 
+                {/* Installment Option */}
+                {product.price >= 5000 && (
+                    <p className="text-xs text-gray-600 mb-2">
+                        or from <span className="font-semibold text-primary">
+                            {formatCurrency(Math.ceil((product.price * 1.15) / 12))}/month
+                        </span>
+                    </p>
+                )}
+
                 {/* Add to Cart Button */}
                 {product.stock > 0 && (
                     <button
