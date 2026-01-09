@@ -550,6 +550,57 @@ export const generateMockProducts = (): Product[] => {
             images: ['https://images.unsplash.com/photo-1606152421811-aa91107bac82?w=800&q=80'],
             location: { state: 'Rivers', city: 'Port Harcourt', address: 'GRA Phase 2' },
         },
+        {
+            name: 'Lexus RX350 2015',
+            description: 'Luxury SUV Lexus RX350. Full option, leather interior.',
+            category: 'vehicles',
+            subcategory: 'Cars',
+            price: 11500000,
+            stock: 3,
+            images: ['https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=800&q=80'],
+            location: { state: 'Lagos', city: 'Lekki', address: 'Lekki Phase 1' },
+        },
+        {
+            name: 'Toyota Hilux 2021',
+            description: 'Rugged Toyota Hilux pickup. 4x4, diesel engine.',
+            category: 'vehicles',
+            subcategory: 'Cars',
+            price: 25000000,
+            stock: 2,
+            images: ['https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=800&q=80'],
+            location: { state: 'Abuja', city: 'Maitama', address: 'Maitama District' },
+        },
+        {
+            name: 'Ford Transit Van',
+            description: 'Spacious Ford Transit Van for logistics and transport.',
+            category: 'vehicles',
+            subcategory: 'Cars',
+            price: 18000000,
+            stock: 1,
+            images: ['https://images.unsplash.com/photo-1464219789935-c2d9d9aba644?w=800&q=80'],
+            location: { state: 'Lagos', city: 'Ikeja', address: 'Alausa' },
+        },
+        {
+            name: 'Mercedes-Benz C300',
+            description: 'Executive Mercedes-Benz C300. 2017 model, clean title.',
+            category: 'vehicles',
+            subcategory: 'Cars',
+            price: 13500000,
+            stock: 2,
+            images: ['https://images.unsplash.com/photo-1617788138017-80ad40651399?w=800&q=80'], // Reusing some unsplash images as placeholders if needed, but preferable unique
+            location: { state: 'Abuja', city: 'Wuse', address: 'Wuse 2' },
+        },
+        {
+            name: 'Mack Truck Head',
+            description: 'Heavy duty Mack truck head for haulage.',
+            category: 'vehicles',
+            subcategory: 'Cars',
+            price: 35000000,
+            stock: 1,
+            images: ['https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=800&q=80'],
+            location: { state: 'Lagos', city: 'Apapa', address: 'Wharf Road' },
+        },
+
 
         // FOOD & GROCERIES (2 products)
         {

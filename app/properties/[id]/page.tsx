@@ -7,6 +7,7 @@ import { ArrowLeft, MapPin, Bed, Bath, Square, Calendar } from 'lucide-react';
 import Header from '@/components/Header';
 import BottomNav from '@/components/BottomNav';
 import InstallmentCalculator from '@/components/InstallmentCalculator';
+import { useToast } from '@/components/ToastProvider';
 import { formatCurrency } from '@/lib/utils/formatting';
 import { safeLocalStorageGet } from '@/lib/utils/safeStorage';
 import type { Property, User } from '@/lib/types';
@@ -15,6 +16,7 @@ export default function PropertyDetailPage() {
     const router = useRouter();
     const params = useParams();
     const propertyId = params.id as string;
+    const { showToast } = useToast();
 
     const [property, setProperty] = useState<Property | null>(null);
     const [landlord, setLandlord] = useState<User | null>(null);
@@ -189,7 +191,13 @@ export default function PropertyDetailPage() {
                         <button className="flex-1 bg-primary text-white py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors">
                             Contact Landlord
                         </button>
-                        <button className="flex-1 bg-gray-100 text-gray-900 py-3 rounded-lg font-semibold hover:bg-gray-200 transition-colors">
+                        <button
+                            onClick={() => {
+                                // In a real app, this would open a modal or navigate to a scheduling page
+                                showToast('Tour request sent! The landlord will contact you shortly.', 'success');
+                            }}
+                            className="flex-1 bg-gray-100 text-gray-900 py-3 rounded-lg font-semibold hover:bg-gray-200 transition-colors"
+                        >
                             Schedule Tour
                         </button>
                     </div>

@@ -83,8 +83,8 @@ export default function PaySmallSmallPage() {
                         <button
                             onClick={() => setActiveTab('all')}
                             className={`py-4 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${activeTab === 'all'
-                                    ? 'border-primary text-primary'
-                                    : 'border-transparent text-gray-500 hover:text-gray-700'
+                                ? 'border-primary text-primary'
+                                : 'border-transparent text-gray-500 hover:text-gray-700'
                                 }`}
                         >
                             All Items
@@ -92,8 +92,8 @@ export default function PaySmallSmallPage() {
                         <button
                             onClick={() => setActiveTab('vehicles')}
                             className={`py-4 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${activeTab === 'vehicles'
-                                    ? 'border-primary text-primary'
-                                    : 'border-transparent text-gray-500 hover:text-gray-700'
+                                ? 'border-primary text-primary'
+                                : 'border-transparent text-gray-500 hover:text-gray-700'
                                 }`}
                         >
                             Vehicles
@@ -101,8 +101,8 @@ export default function PaySmallSmallPage() {
                         <button
                             onClick={() => setActiveTab('properties')}
                             className={`py-4 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${activeTab === 'properties'
-                                    ? 'border-primary text-primary'
-                                    : 'border-transparent text-gray-500 hover:text-gray-700'
+                                ? 'border-primary text-primary'
+                                : 'border-transparent text-gray-500 hover:text-gray-700'
                                 }`}
                         >
                             Properties
@@ -118,7 +118,7 @@ export default function PaySmallSmallPage() {
                                 <Car className="w-5 h-5 text-primary" />
                                 <h2 className="text-lg font-bold text-gray-900">Vehicles</h2>
                             </div>
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                                 {showVehicles.map(product => (
                                     <ProductCard key={product.id} product={product} />
                                 ))}
@@ -132,7 +132,7 @@ export default function PaySmallSmallPage() {
                                 <Home className="w-5 h-5 text-primary" />
                                 <h2 className="text-lg font-bold text-gray-900">Properties</h2>
                             </div>
-                            <div className="space-y-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 {showProperties.map(property => (
                                     <PropertyCard key={property.id} property={property} />
                                 ))}
