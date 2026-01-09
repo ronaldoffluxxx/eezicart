@@ -28,7 +28,26 @@ function ProductsContent() {
 
     useEffect(() => {
         const allProducts = safeLocalStorageGet<Product[]>('products', []);
-        if (allProducts && allProducts.length > 0) {
+
+        // Initialize mock data if products don't exist
+        if (!allProducts || allProducts.length === 0) {
+            import('@/lib/utils/mockData').then(({ initializeMockData }) => {
+                initializeMockData();
+                // Reload after initialization
+                const newProducts = safeLocalStorageGet<Product[]>('products', []);
+                if (newProducts && newProducts.length > 0) {
+                    setProducts(newProducts);
+                    const category = searchParams.get('category');
+                    if (category) {
+                        const filtered = newProducts.filter(p => p.category === category);
+                        setFilteredProducts(filtered);
+                    } else {
+                        setFilteredProducts(newProducts);
+                    }
+                }
+                setIsLoading(false);
+            });
+        } else {
             setProducts(allProducts);
 
             // Apply category filter if present
@@ -39,11 +58,11 @@ function ProductsContent() {
             } else {
                 setFilteredProducts(allProducts);
             }
+            setIsLoading(false);
         }
 
         const savedWishlist = safeLocalStorageGet<string[]>('wishlist', []);
         setWishlist(savedWishlist || []);
-        setIsLoading(false);
     }, [searchParams]);
 
     // Sort products
